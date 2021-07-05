@@ -19,3 +19,12 @@ nnoremap <silent> <Space> :silent noh<Bar>echo<CR>
 
 " Change default DarkBlue comment_color to LightBlue
 hi Comment ctermfg=LightBlue
+
+
+" Add snakemake (.snake, .smk) syntax:
+" mkdir -p ~/.vim/syntax/
+" wget -p ~/.vim/syntax/ https://mstamenk.github.io/assets/files/snakemake.vim
+" # uncomment the follwing afterwards
+" au BufNewFile,BufRead Snakefile set syntax=snakemake
+" au BufNewFile,BufRead *.snake set syntax=snakemake
+" au BufNewFile,BufRead *.smk set syntax=snakemake
