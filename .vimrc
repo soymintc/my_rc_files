@@ -175,3 +175,9 @@ nnoremap <silent> <C-h> :TmuxNavigateLeft<CR>
 nnoremap <silent> <C-j> :TmuxNavigateDown<CR>
 nnoremap <silent> <C-k> :TmuxNavigateUp<CR>
 nnoremap <silent> <C-l> :TmuxNavigateRight<CR>
+
+
+" type greek letters using latex
+let g:latex_to_unicode_file_typesd = ".*"
+let g:latex_to_unicode_file_types_blacklist = ["tex", "plaintex"]
+let g:latex_to_unicode_auto = 1
