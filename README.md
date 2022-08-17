@@ -5,3 +5,4 @@
 - .profile: saved to be used in juno and ceto
 - .bashrc
 - .screenrc
+- .tmux.conf 
