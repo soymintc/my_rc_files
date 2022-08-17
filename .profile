@@ -146,3 +146,11 @@ export LC_MESSAGES="C"
 
 # set LC_CTYPE - allow special chars
 export LC_CTYPE=en_US.utf8
+
+# source-highlight
+export LESSOPEN="| $HOME/bin/src-hilite-lesspipe.sh %s"
+export LESS=' -R '
+
+# default editor
+export EDITOR=vim
+
