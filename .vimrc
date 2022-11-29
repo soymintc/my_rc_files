@@ -11,6 +11,7 @@ call plug#begin()
   Plug 'vim-airline/vim-airline'
   Plug 'JuliaEditorSupport/julia-vim'
   Plug 'arthurxavierx/vim-unicoder'
+  Plug 'LukeGoodsell/nextflow-vim'
 call plug#end()
 
 

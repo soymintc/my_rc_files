@@ -107,6 +107,9 @@ PATH="$HOME/miniconda3/bin:$PATH"
 
 # Activate singularity: 3.6.2
 module load singularity/3.6.2
+export SINGULARITY_CACHEDIR=/juno/work/shah/users/chois7/singularity/cache
+#export SINGULARITY_DOCKER_USERNAME=soymintc
+#export SINGULARITY_DOCKER_PASSWORD=$(cat ~/.dockerhub_password)
 
 # OncoKB API key
 export ONCOKB_API_KEY="7143fc3e-61b8-4bbf-b489-e6e083ca6472"
@@ -132,7 +135,8 @@ export PATH=$PATH:/juno/work/shah/users/chois7/packages/gdc
 
 # isabl
 export ISABL_API_URL='https://isabl.shahlab.mskcc.org/api/v1/'
-export ISABL_CLIENT_ID=20 # ID with rohqc support
+#export ISABL_CLIENT_ID=20 # ID with rohqc support
+export ISABL_CLIENT_ID=3 # production
 
 # set different cache and tmp dir
 export TMPDIR=/juno/work/shah/users/chois7/tmp
@@ -154,3 +158,9 @@ export LESS=' -R '
 # default editor
 export EDITOR=vim
 
+# for bcftools
+# after configure --prefix=~ , make, make install of gsl-2.7
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/chois7/lib
+
+# nextflow
+export CAPSULE_LOG=none
