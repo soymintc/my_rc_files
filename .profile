@@ -107,12 +107,12 @@ PATH="$HOME/miniconda3/bin:$PATH"
 
 # Activate singularity: 3.6.2
 module load singularity/3.6.2
-export SINGULARITY_CACHEDIR=/juno/work/shah/users/chois7/singularity/cache
+#export SINGULARITY_CACHEDIR=/juno/work/shah/users/chois7/singularity/cache
+export SINGULARITY_CACHEDIR=/rtsess01/compute/juno/shah/users/chois7/.cache
+#export NXF_SINGULARITY_CACHEDIR=/juno/work/shah/users/chois7/nextflow/cache
+export NXF_SINGULARITY_CACHEDIR=/rtsess01/compute/juno/shah/users/chois7/.cache
 #export SINGULARITY_DOCKER_USERNAME=soymintc
 #export SINGULARITY_DOCKER_PASSWORD=$(cat ~/.dockerhub_password)
-
-# OncoKB API key
-export ONCOKB_API_KEY="7143fc3e-61b8-4bbf-b489-e6e083ca6472"
 
 # Add /juno/shah/work/users/chois7 to PATH
 PATH="$PATH:/juno/work/shah/users/chois7"
@@ -131,7 +131,11 @@ export PATH=/home/chois7/.aspera/cli/bin:$PATH
 export MANPATH=/home/chois7/.aspera/cli/share/man:$MANPATH
 
 # Add gdc-client
-export PATH=$PATH:/juno/work/shah/users/chois7/packages/gdc
+export PATH=$PATH:/juno/work/shah/users/chois7/packages/gdc # gdc-client
+export PATH=$PATH:/juno/work/shah/users/chois7/packages/AnnotSV/bin # AnnotSV
+export PATH=$PATH:/juno/work/shah/users/chois7/packages/svtools # vcfToBedpe etc
+export PATH=$PATH:/juno/work/shah/users/chois7/envs/R/lib/R/library/dryclean/extdata # dryclean (drcln)
+
 
 # isabl
 export ISABL_API_URL='https://isabl.shahlab.mskcc.org/api/v1/'
@@ -139,9 +143,9 @@ export ISABL_API_URL='https://isabl.shahlab.mskcc.org/api/v1/'
 export ISABL_CLIENT_ID=3 # production
 
 # set different cache and tmp dir
-export TMPDIR=/juno/work/shah/users/chois7/tmp
-export PIP_CACHE_DIR=/juno/work/shah/users/chois7/.cache
-export XDG_CACHE_HOME=/juno/work/shah/users/chois7/.cache
+export TMPDIR=/rtsess01/compute/juno/shah/users/chois7/tmp
+export PIP_CACHE_DIR=/rtsess01/compute/juno/shah/users/chois7/.cache
+export XDG_CACHE_HOME=/rtsess01/compute/juno/shah/users/chois7/.cache
 
 # language settings
 export LANGUAGE="en"
@@ -160,7 +164,56 @@ export EDITOR=vim
 
 # for bcftools
 # after configure --prefix=~ , make, make install of gsl-2.7
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/chois7/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/chois7/lib:/home/chois7/lib/lib
 
 # nextflow
 export CAPSULE_LOG=none
+
+# alias customis
+alias py37='conda activate /juno/work/shah/users/chois7/envs/p37'
+alias py39='conda activate /rtsess01/compute/juno/shah/users/chois7/envs/p39'
+alias juno='ssh -A chois7@juno.mskcc.org'
+alias ceto='ssh -A chois7@ceto.mskcc.org'
+alias lilac='ssh -A chois7@lilac.mskcc.org'
+alias mipy37='mamba install -p /juno/work/shah/users/chois7/envs/p37 -c bioconda -c conda-forge'
+alias mipy39='mamba install -p /rtsess01/compute/juno/shah/users/chois7/envs/p39 -c bioconda -c conda-forge'
+alias bfg='java -jar ~/bin/bfg-1.14.0.jar'
+alias make_sing='singularity run -B /juno ~/chois7/singularity/sif/cmake.sif make'
+alias cmake_sing='singularity run -B /juno ~/chois7/singularity/sif/cmake.sif cmake'
+function rp { realpath $1 | sed 's/^\/juno//' | sed 's/^\/ceto//'; }
+
+# R libs user
+export R_LIBS_USER=/juno/work/shah/users/chois7/R/x86_64-pc-linux-gnu-library/4.2_singularity
+
+# git-filter-repo
+export PATH=$PATH:/juno/work/shah/users/chois7/packages/git-filter-repo
+
+# IgCaller
+export PATH=$PATH:/juno/work/shah/users/chois7/packages/IgCaller
+
+# Run R like a civilized person
+function Rscript_ {
+    module purge
+    module load singularity/3.7.1
+    singularity exec -B /work:/work -B /admin:/admin -B /common:/common -B /juno:/juno /work/shah/users/leej39/singularity/rstudio-V0.8.sif Rscript "$@"
+}
+
+# github token
+export GITHUB_TOKEN=$(cat ~/.gittoken)
+
+# making life easier
+function analysis {
+    cd /juno/work/shah/isabl_data_lake/analyses/${1: -4:-2}/${1: -2}/${1}
+}
+
+alias bjobso='bjobs -o "JOBID:10 SUBMIT_TIME:13 USER:7 STAT:6 QUEUE:10 EXEC_HOST:10 JOB_NAME"'
+
+# alias ipynb to md
+alias tomd='jupytext --to markdown'
+
+# JAVA home
+export JAVA_HOME='/home/chois7/.jdk/jdk-11.0.22+7'
+export PATH=$PATH:$JAVA_HOME/bin
+
+# bedtools2
+export PATH=$PATH:/fscratch/chois7/packages/bedtools2/bin
